@@ -1,0 +1,1 @@
+<title>Horse info</title>

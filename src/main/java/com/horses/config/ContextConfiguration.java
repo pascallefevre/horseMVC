@@ -6,7 +6,6 @@ import org.springframework.context.annotation.Import;
 
 
 
-
 @Configuration
 @Import(JPAConfiguration.class)
 @ComponentScan("com.horses.dao")
