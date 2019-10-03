@@ -2,20 +2,23 @@ package com.horses.domain;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table (name= "Owner_table")
@@ -30,18 +33,18 @@ public class Owner
 	@Temporal(TemporalType.DATE)
 	private Date birthday;
 	private String city;
-	
-	@OneToMany(mappedBy = "myOwner")
-	private List<Horse> myHorse = new ArrayList<Horse>();
-	
-	@ManyToMany(mappedBy = "theOwners")
-	private List<Stable> myStables=new ArrayList<Stable>();
-	
-	
+	@JsonIgnore
+	@OneToMany(mappedBy = "myOwner", fetch = FetchType.EAGER)
+	private Set<Horse> myHorse = new HashSet<Horse>();
+	@JsonIgnore
+	@ManyToMany(mappedBy = "theOwners", fetch = FetchType.EAGER)
+	private Set<Stable> myStables=new HashSet<Stable>();
 	
 	
-	public Owner(String firstname, String lastname, Date birthday, String city, List<Horse> myHorse,
-			List<Stable> myStables) {
+	
+	
+	public Owner(String firstname, String lastname, Date birthday, String city, Set<Horse> myHorse,
+			Set<Stable> myStables) {
 		super();
 		this.firstname = firstname;
 		this.lastname = lastname;
@@ -99,18 +102,18 @@ public class Owner
 		this.city = city;
 	}
 	
-	public List<Horse> getMyHorse() {
+	public Set<Horse> getMyHorse() {
 		return myHorse;
 	}
 
-	public void setMyHorse(List<Horse> myHorse) {
+	public void setMyHorse(Set<Horse> myHorse) {
 		this.myHorse = myHorse;
 	}
 
-	public List<Stable> getMyStables() {
+	public Set<Stable> getMyStables() {
 		return myStables;
 	}
-	public void setMyStables(List<Stable> myStables) {
+	public void setMyStables(Set<Stable> myStables) {
 		this.myStables = myStables;
 	}
 	

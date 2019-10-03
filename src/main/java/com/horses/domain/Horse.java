@@ -15,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table (name= "Horse_table")
 public class Horse 
@@ -29,10 +31,11 @@ public class Horse
 	private Date birthday;
 	@Enumerated(EnumType.STRING)
 	private EColor color;
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn (name="OWNR_ID")
 	private Owner myOwner;
-	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn (name="STBL_ID")
 	private Stable myStable;

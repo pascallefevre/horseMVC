@@ -31,7 +31,7 @@ public class HorseController
 		Horse h = new Horse();
 		model.addAttribute("color",EColor.values() );
 		model.addAttribute("newhorse", h);
-		return "add";
+		return "fhorse/add";
 	}
 	
 	@RequestMapping(value= "/add", method= RequestMethod.POST)
@@ -46,7 +46,7 @@ public class HorseController
 		model.addAttribute("color",EColor.values() );
 		model.addAttribute("newhorse", h);
 		model.addAttribute("action","edit");
-		return "add";
+		return "fhorse/add";
 	}
 	
 	@RequestMapping(value= "/delete/{id}", method= RequestMethod.GET)
@@ -55,17 +55,17 @@ public class HorseController
 		if(h!=null) 
 		{
 			hdao.deleteById(id);
-			return "show";
+			return "fhorse/show";
 		}
 		else 
-			return "show";
+			return "fhorse/show";
 	}
 	
 	@RequestMapping(value= "/show", method = RequestMethod.GET)
 	public String show(Model model) {
 		List<Horse> lhorse = (List<Horse>)hdao.findAll();
 		model.addAttribute("lhorse", lhorse );
-		return "show";
+		return "fhorse/show";
 	}
 	
 	@InitBinder       
